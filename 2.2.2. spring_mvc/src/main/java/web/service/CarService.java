@@ -22,6 +22,10 @@ public class CarService {
     }
 
     public List<Car> getCars(@RequestParam(value = "count", required = false) Integer count) {
-        return cars.stream().limit(count).collect(Collectors.toList());
+        if (count == null || count <= 0) {
+            return cars.stream().limit(cars.size()).collect(Collectors.toList());
+        } else {
+            return cars.stream().limit(count).collect(Collectors.toList());
+        }
     }
 }
